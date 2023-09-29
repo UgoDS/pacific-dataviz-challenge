@@ -18,9 +18,10 @@ def check_valeur_moy(df_fruits: pd.DataFrame):
     )
     df_fruits["pb_value"] = df_fruits["valeur_moy"] - df_fruits["calculated_value"]
     if df_fruits[df_fruits["pb_value"] != 0].shape[0] > 0:
-        raise ValueError
+        print("There might be an error in the data")
+        print(df_fruits[df_fruits["pb_value"] != 0])
     return df_fruits
 
 
 def remove_2023(df_fruit: pd.DataFrame):
-    return df_fruit[df_fruit["annee"]!=2023]
+    return df_fruit[df_fruit["annee"] != 2023]

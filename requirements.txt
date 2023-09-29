@@ -15,6 +15,7 @@ ipkykernel
 streamlit
 pandas
 kedro-datasets
+scipy
 
 # graph
 plotly

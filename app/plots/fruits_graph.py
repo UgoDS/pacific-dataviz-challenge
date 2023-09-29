@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.express as px
 from plotly.subplots import make_subplots
-from plotly.offline import plot
+import plotly.graph_objects as go
 
 
 def create_radial_scatter(df: pd.DataFrame, col_value: str, add_legend: bool=False):
@@ -34,7 +34,19 @@ def make_custom_subplots(list_figs):
     fig.update_layout(template="plotly_dark", width=1100, height=550)
     fig.update_annotations(y=1.1, selector={'text':'Price (FR/kg)'})
     fig.update_annotations(y=1.1, selector={'text':'Quantity (kg)'})
-    fig.update_polars(angularaxis_rotation=90)
+    fig.update_polars(angularaxis_rotation=90, angularaxis_direction="clockwise")
+    return fig
 
-    
+
+def plot_slop(df_fruit_agg, intercept, slope):
+    fig = go.Figure()
+    x = df_fruit_agg["annee"].values
+    y = df_fruit_agg["avg_price_year"].values
+    fig.add_trace(go.Scatter(x=x, y=y,
+                        mode='lines',
+                        name='lines'))
+    fig.add_trace(go.Scatter(x=x, y=intercept + slope * x,
+                        mode='lines+markers',
+                        name='lines+markers'))
+
     return fig
