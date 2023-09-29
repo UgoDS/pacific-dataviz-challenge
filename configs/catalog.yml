@@ -1,0 +1,24 @@
+"""
+Here are some common examples. You can check the doc here: https://docs.kedro.org/en/stable/data/data_catalog.html
+companies:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/companies.csv
+
+reviews:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/reviews.csv
+
+shuttles:
+  type: pandas.ExcelDataSet
+  filepath: data/01_raw/shuttles.xlsx
+  load_args:
+    engine: openpyxl # Use modern Excel engine (the default since Kedro 0.18.0)
+"""
+
+fruits:
+  type: api.APIDataSet
+  url: https://data.gouv.nc/api/explore/v2.1/catalog/datasets/pacificdatavizchallenge_fruits_et_legumes_regroupement1/records
+  params:
+    select: annee, mois, regroupement1, regroupement2, poids_enquete_kg, poids_mg_kg, valeur_tot_mg_fr, valeur_moy
+    order_by: annee, mois
+    limit: 100
